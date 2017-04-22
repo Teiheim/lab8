@@ -13,7 +13,8 @@ public class LexiconNode implements Comparable{
     public LexiconNode(){
 
 	isWord = false;
-	value = null;
+	//There was an error that you can't store null as a char. Switched it to the "null character"
+	value = '\u0000';
 
     }
 
@@ -43,12 +44,13 @@ public class LexiconNode implements Comparable{
 	if(children.get(count).compareTo(l) == 0)
 	    return;
 	
-	children.add(l, count);
+	children.add(count, l);
 
     }
 
     public int compareTo(LexiconNode l){
-
+	//There is a problem here that the thing can't be deferenced
+	//Okay there is something wrong about the compareTo method 
 	return(this.getValue().compareTo(l.getValue()));
 
     }
@@ -71,7 +73,7 @@ public class LexiconNode implements Comparable{
 
     }
 
-    public boolean hasChild(c){
+    public boolean hasChild(char c){
 
 	return children.contains(c);
 
@@ -85,7 +87,7 @@ public class LexiconNode implements Comparable{
 
     public Iterator<LexiconNode> iterator(){
 
-	return children.iterator<LexiconNode>();
+	return children.iterator();
 
     }
 
